@@ -1,0 +1,37 @@
+.container{
+    padding: 10px;
+    font-family: Arial;
+}
+
+.container h4{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+::placeholder{
+    font-style: italic;
+    color: grey;
+}
+.table{
+    text-align: center;
+}
+
+span{
+    color: red;
+}
+
+.modal-header{
+    background-color: lightblue;
+}
+
+.modal{
+    color: steelblue;
+    font-weight: bold;
+}
+
+.btn-secondary{
+    background-color: #00BFFF;
+}
+
+textarea{
+    width: 500px;
+}

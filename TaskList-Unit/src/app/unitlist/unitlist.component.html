@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="row"><h4 style="color: steelblue;">DANH MỤC ĐƠN VỊ TÍNH</h4></div>
+    <div class="row">
+        <div class="col-8">
+            <span style="color:steelblue;"><b>Tìm kiếm </b></span>
+            <input type="text" placeholder=" MÃ, TÊN ĐVT" value="">
+        </div>
+        <div class="col" style="text-align: right;">
+            <button class="btn btn-info" (click)="Search()">Tìm kiếm</button>
+        </div>
+        <div class="col-lg-auto" style="text-align: right;">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exModal">Thêm mới</button>
+        </div>
+    </div>
+    <hr color="lightblue"/>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-primary">
+                    <th style="width:50px;">#</th>
+                    <th style="width: 150px;" >MÃ ĐVT</th>
+                    <th >TÊN ĐVT</th>
+                    <th >GHI CHÚ</th>
+                    <th style="width: 150px;">Sort</th>
+                    <th style="width: 150px;"></th>            
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of arrUnitList">                    
+                        <td>{{item.id + 1}}</td>
+                        <td>{{item.DVT}}</td>
+                        <td style="text-align: left;">{{item.Name}}</td>
+                        <td style="text-align: left;">{{item.Note}}</td>
+                        <td>
+                            <img (click)="swapItem(item.id, item.id-1);" src="assets/image/UpArrow.png" class="img-fluid img-thumbnail" alt="Error img" width="30px" height="30px" >
+                            <img (click)="swapItem(item.id, item.id+1);" src="assets/image/DownArrow.png" class="img-fluid img-thumbnail" alt="Error img" width="30px" height="30px" >
+                        </td>
+                        <td>
+                            <img (click)="updateItem(item.id);" src="assets/image/Edit.png" class="img-fluid img-thumbnail" alt="Error img" width="30px" height="30px" >
+                            <img (click)="removeItem(item.id);"img src="assets/image/bin.png" class="img-fluid img-thumbnail" alt="Error img" width="30px" height="30px" >
+                            <img data-toggle="modal" data-target="#ModalDelete" src="assets/image/bin.png" class="img-fluid img-thumbnail" alt="Error img" width="30px" height="30px" >
+                        </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal AddItem -->
+<div class="modal fade " id="exModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">THÊM MỚI/EDIT ĐƠN VỊ TÍNH</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row margin">
+                <div class="col-3 text-right">
+                    MÃ ĐVT <span>*</span>
+                </div>
+                <div class="col-8">
+                    <div class="">
+                        <input type="text" [(ngModel)]="tmpDVT" placeholder="KG" style="width: 500px;">
+                    </div>
+                </div>
+            </div><br />
+            <div class="row margin">
+                <div class="col-3 text-right">
+                    Tên đơn vị tính<span>*</span>
+                </div>
+                <div class="col-8">
+                    <div class="">
+                        <input type="text" [(ngModel)]="tmpName" placeholder="kg" style="width: 500px;">
+                    </div>
+                </div>
+            </div><br />
+            <div class="row margin">
+                <div class="col-3 text-right">
+                    Ghi chú
+                </div>
+                <div class="col-8">
+                    <div class="">
+                        <textarea [(ngModel)]="tmpNote" placeholder="Kilogram"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="col-3 text-right">            
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" value="" [(ngModel)]="CheckUse" > Sử dụng
+                </div>
+            </div><br />
+            <div class="col-8">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addNewItem()">Lưu & đóng</button>
+                <button type="submit" class="btn btn-primary" (click)="addNewItem()">Lưu & Thêm mới</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete -->
+  <div  class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalDeleteLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDeleteLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa dữ liệu không ?
+                <div >
+                    <button type="button" class="btn btn-primary" (click)="removeItem(item.id);" data-dismiss="modal">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>          
+        </div>
+    </div>
+</div>
